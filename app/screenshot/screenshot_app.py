@@ -17,7 +17,7 @@ class ScreenshotApp:
 
         self.stop_button = Button(master, text="Stop Capturing", command=self.stop_capture)
         self.stop_button.pack()
-
+        self.screenshot_name = "screenshot.png"
         self.capture_screenshots()
 
     def create_images_folder(self):
@@ -27,9 +27,7 @@ class ScreenshotApp:
         return folder_name
 
     def capture_screenshot(self):
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        screenshot_name = f"screenshot_{timestamp}.png"
-        screenshot_path = os.path.join(self.folder_path, screenshot_name)
+        screenshot_path = os.path.join(self.folder_path, self.screenshot_name)
         pyautogui.screenshot(screenshot_path)
         print(f"Screenshot captured: {screenshot_path}")
 
@@ -39,8 +37,15 @@ class ScreenshotApp:
             self.capture_screenshot()
             time.sleep(5)  # Capture a screenshot every 5 seconds
             self.master.update()  # Update the GUI to handle events
+            self.delete_screenshot()
 
     def stop_capture(self):
         self.running = False
         print("\nScreenshot capturing stopped.")
         self.master.destroy()
+
+    def delete_screenshot(self):
+        screenshot_path = os.path.join(self.folder_path, self.screenshot_name)
+        if os.path.exists(screenshot_path):
+            os.remove(screenshot_path)
+            print(f"Screenshot Deleted: {screenshot_path}")
