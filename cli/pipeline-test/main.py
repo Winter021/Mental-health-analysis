@@ -1,9 +1,16 @@
+# from screenshot_app import ScreenshotApp
+import sys
+sys.path.append('/home/rahul/Desktop/My-Computer/Web-Dev/Projects/BTP/Mental-health-analysis/app/screenshot/')
+sys.path.append('/home/rahul/.local/bin')
+
 from screenshot_app import ScreenshotApp
 import time
 import tkinter as tk
 import csv
 from PIL import Image
 from transformers import BlipProcessor, BlipForConditionalGeneration
+
+
 
 def write_to_csv(caption):
     csv_file = "captions.csv"
@@ -18,7 +25,7 @@ def main():
     while (True) :
         app.capture_screenshot()
         
-        img_url = r"C:\Users\Vikas\OneDrive\Desktop\BTP\Mental-health-analysis\cli\pipeline-test\images\screenshot.png"
+        img_url = r"/home/rahul/Desktop/My-Computer/Web-Dev/Projects/BTP/Mental-health-analysis/cli/pipeline-test/images/screenshot.png"
         raw_image = Image.open(img_url)
 
         inputs = processor(raw_image, return_tensors="pt").to("cuda")
