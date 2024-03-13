@@ -10,12 +10,11 @@ import csv
 from PIL import Image
 from transformers import BlipProcessor, BlipForConditionalGeneration
 
-
-
-def write_to_csv(caption):
+def write_to_csv(caption, prev_event_time):
     csv_file = "captions.csv"
     with open(csv_file, 'a', newline='') as file:
         writer = csv.writer(file)
+        writer.writerow([prev_event_time])
         writer.writerow([caption])
 
 def main():
@@ -23,7 +22,7 @@ def main():
     processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
     model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base").to("cuda")
     while (True) :
-        app.capture_screenshot()
+        prev_event_time = app.capture_screenshot()
         
         img_url = r"/home/rahul/Desktop/My-Computer/Web-Dev/Projects/BTP/Mental-health-analysis/cli/pipeline-test/images/screenshot.png"
         raw_image = Image.open(img_url)
@@ -33,7 +32,7 @@ def main():
         out = model.generate(**inputs)
         caption = (processor.decode(out[0], skip_special_tokens=True))
         print(caption)
-        write_to_csv(caption)
+        write_to_csv(caption, prev_event_time)
         app.delete_last_screenshot()
         time.sleep(5)
 
