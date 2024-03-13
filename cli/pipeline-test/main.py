@@ -1,6 +1,6 @@
 # from screenshot_app import ScreenshotApp
 import sys
-sys.path.append('/home/rahul/Desktop/My-Computer/Web-Dev/Projects/BTP/Mental-health-analysis/app/screenshot/')
+sys.path.append('/home/rahul/Desktop/My-Computer/Web-Dev/Projects/BTP/Rishikesh code/Mental-health-analysis/app/screenshot/')
 sys.path.append('/home/rahul/.local/bin')
 
 from screenshot_app import ScreenshotApp
@@ -24,7 +24,7 @@ def main():
     while (True) :
         prev_event_time = app.capture_screenshot()
         
-        img_url = r"/home/rahul/Desktop/My-Computer/Web-Dev/Projects/BTP/Mental-health-analysis/cli/pipeline-test/images/screenshot.png"
+        img_url = r"/home/rahul/Desktop/My-Computer/Web-Dev/Projects/BTP/Rishikesh code/Mental-health-analysis/cli/pipeline-test/images/screenshot.png"
         raw_image = Image.open(img_url)
 
         inputs = processor(raw_image, return_tensors="pt").to("cuda")

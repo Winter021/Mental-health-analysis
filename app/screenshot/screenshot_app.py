@@ -34,20 +34,20 @@ class ScreenshotApp:
             # Compare with the previous active window
             if current_active_window != self.last_active_window:
                 # Save the current screenshot
-                curr_time = time.localtime()
-                prev_event_period = curr_time - self.last_active_time
+                curr_time = time.mktime(time.localtime())
+                prev_event_period = curr_time - time.mktime(self.last_active_time)
                 screenshot_path = os.path.join(self.folder_path, self.screenshot_name)
                 pyautogui.screenshot(screenshot_path)
                 print(f"Screenshot captured: {screenshot_path}")
                 self.last_screenshot_path = screenshot_path
                 self.last_active_window = current_active_window
-                self.last_active_time = curr_time
+                self.last_active_time = time.localtime()
                 image_captured = True
             else:
                 print("No change in active window detected. Waiting for a change...")
                 time.sleep(1)
         return prev_event_period
-
+    
     def delete_last_screenshot(self):
         if self.last_screenshot_path and os.path.exists(self.last_screenshot_path):
             os.remove(self.last_screenshot_path)
