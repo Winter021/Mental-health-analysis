@@ -19,21 +19,19 @@ import logging
 
 def context_retrieval(filename, query, k=10):
     try:
-        # Load CSV data and preprocess text
-
-        # Initialize document loader, embeddings, and vector store
-        loader = CSVLoader(file_path=filename, source_column="Summary")
+        
+        loader = CSVLoader(file_path=filename, source_column="Summary", encoding='utf-8')
         documents = loader.load()
+        print("hello")
         text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
         docs = text_splitter.split_documents(documents)
         embeddings = HuggingFaceEmbeddings()
         db = FAISS.from_documents(docs, embeddings)
 
-        # Perform similarity search with the query
         retrieved_docs = db.similarity_search(query, k=k)
         return retrieved_docs
     except Exception as e:
-        print("error")
+        print("error: ", e)
         raise e
 
 def rag_process(llm_model, retrieved_docs, question):

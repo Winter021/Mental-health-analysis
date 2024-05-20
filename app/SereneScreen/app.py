@@ -16,6 +16,7 @@ if uploaded_file is not None:
             f.write(uploaded_file.getvalue())
 
         # Retrieve context based on the saved file and query
+        print("save path is: ", save_path)
         retrieved_docs = context_retrieval(save_path, "Which of these is most indicative of the user's mental health state?")
 
         # Proceed button
