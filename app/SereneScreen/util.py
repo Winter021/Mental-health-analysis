@@ -20,7 +20,7 @@ import logging
 def context_retrieval(filename, query, k=10):
     try:
         
-        loader = CSVLoader(file_path=filename, source_column="Summary", encoding='utf-8')
+        loader = CSVLoader(file_path=filename, source_column="Summary")
         documents = loader.load()
         print("hello")
         text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)

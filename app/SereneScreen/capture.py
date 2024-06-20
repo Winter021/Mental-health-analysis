@@ -178,7 +178,8 @@ def capture(stop_flag, flag):
         while not stop_flag.is_set() :
             prev_event_time = app.capture_screenshot_windows()
             
-            img_url = r"D:\btp2\Mental-health-analysis-main\app\SereneScreen\images\screenshot.png"
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            img_url = os.path.join(script_dir, "images", "screenshot.png")
             raw_image = Image.open(img_url)
 
             inputs = processor(raw_image, return_tensors="pt").to("cuda")

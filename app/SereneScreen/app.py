@@ -48,13 +48,16 @@ uploaded_file = st.file_uploader("Upload a file", type=['csv'])
 if uploaded_file is not None:
     try:
         # Save the uploaded file locally
-        save_path = uploaded_file
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        files_dir = os.path.join(script_dir, "files")
+        os.makedirs(files_dir, exist_ok=True)
+        save_path = os.path.join("files", uploaded_file.name)  # Specify the save path
         with open(save_path, "wb") as f:
-            f.write("D:\btp2\Mental-health-analysis-main\app\SereneScreen\\", uploaded_file.getvalue())
-
+            f.write(uploaded_file.getvalue())
         # Retrieve context based on the saved file and query
         retrieved_docs = context_retrieval(save_path, "Which of these is most indicative of the user's mental health state?")
 
+        print("doesn't work")
         # Proceed button
         if st.button("Proceed"):
             # Perform RAG process and get prediction
