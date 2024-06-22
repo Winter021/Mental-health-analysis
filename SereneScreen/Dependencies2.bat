@@ -1,0 +1,3 @@
+ECHO Creating conda environment...
+conda create --name serenescreen
+PAUSE
