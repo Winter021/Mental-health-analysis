@@ -17,6 +17,7 @@ import win32gui
 import win32process
 import psutil
 import warnings
+from util import stress_model_processing, anxiety_model_processing, loneliness_model_processing
 
 # Ignore specific warning
 warnings.filterwarnings("ignore", message="Using the model-agnostic default `max_length`")
@@ -231,6 +232,10 @@ def capture(stop_flag, flag):
             x1 = random.randint(30, 60)
             x2 = random.randint(40, 70)
             x3 = random.randint(20, 80)
+
+            stress = stress_model_processing()
+            anxiety = anxiety_model_processing()
+            loneliness = loneliness_model_processing()
     
             # Print All
             print("Caption:", caption, '\n', "Extracted Text:", extracted_text, '\n', "Summary:", response_string,'\n',  "Anxiety%:", x1, '\n', "Loneliness%:", x2, '\n', "Stress%:", x3, '\n')

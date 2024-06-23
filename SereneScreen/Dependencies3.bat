@@ -7,7 +7,7 @@ IF ERRORLEVEL 1 (
 )
 
 ECHO Installing additional packages...
-pip install pygetwindow pillow pytesseract transformers requests textblob pywin32 pyautogui langchain streamlit langchain_community langchain_openai sentence-transformers faiss-cpu psutil --upgrade
+pip install pygetwindow pillow pytesseract transformers requests textblob pywin32 pyautogui langchain streamlit langchain_community langchain_openai sentence-transformers faiss-cpu psutil numpy --upgrade
 IF ERRORLEVEL 1 (
     ECHO Failed to install some packages.
     PAUSE
