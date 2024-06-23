@@ -1,0 +1,5 @@
+ECHO
+conda init
+PAUSE
+
+
